@@ -17,7 +17,7 @@
                BlueprintIdentifier = "69A8D63824530E9200B593CB"
                BuildableName = "RichEditorFramework.framework"
                BlueprintName = "RichEditorFramework"
-               ReferencedContainer = "container:RichEditorFramework.xcodeproj">
+               ReferencedContainer = "container:SwiftRichEditorView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -53,7 +53,7 @@
             BlueprintIdentifier = "69A8D63824530E9200B593CB"
             BuildableName = "RichEditorFramework.framework"
             BlueprintName = "RichEditorFramework"
-            ReferencedContainer = "container:RichEditorFramework.xcodeproj">
+            ReferencedContainer = "container:SwiftRichEditorView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
