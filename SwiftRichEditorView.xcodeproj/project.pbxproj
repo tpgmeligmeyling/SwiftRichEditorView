@@ -394,7 +394,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 69A8D63324530E9200B593CB /* Build configuration list for PBXProject "RichEditorFramework" */;
+			buildConfigurationList = 69A8D63324530E9200B593CB /* Build configuration list for PBXProject "SwiftRichEditorView" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -668,6 +668,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Debug;
 		};
@@ -693,6 +694,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Release;
 		};
@@ -733,7 +735,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		69A8D63324530E9200B593CB /* Build configuration list for PBXProject "RichEditorFramework" */ = {
+		69A8D63324530E9200B593CB /* Build configuration list for PBXProject "SwiftRichEditorView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69A8D63F24530E9200B593CB /* Debug */,
