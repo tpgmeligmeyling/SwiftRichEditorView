@@ -13,7 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- "use strict";
+// "use strict";
+
+const _DOMElement = new Map();
+
+function DispatchGroup() {
+
+    this.count = 0;
+    this.onComplete = function() {};
+    this.enter = function enter() {
+        this.count++;
+    };
+
+    this.leave = function leave() {
+        this.count--;
+        if (this.count == 0) {
+            this.onComplete();
+        }
+    }
+    
+    this.setOnComlete = function setOnComlete(onComplete) {
+        this.onComplete = onComplete;
+        if (this.count == 0) {
+            this.onComplete();
+        }
+    }
+}
+
+var forceRedraw = function(element){
+  var disp = element.style.display;
+  element.style.display = 'none';
+  var trick = element.offsetHeight;
+  element.style.display = disp;
+};
 
 var RE = {};
 
@@ -22,6 +54,86 @@ RE.editor = document.getElementById('editor');
 // Not universally supported, but seems to work in iOS 7 and 8
 document.addEventListener("selectionchange", function() {
     RE.backuprange();
+});
+
+RE.replaceImageSourceWithBase64Image = function(originalSourceURL, base64URL) {
+    _DOMElement.get(originalSourceURL).src = base64URL;
+    window.dispatchGroup.leave();
+    RE.editor.forceUpdate();
+};
+
+document.addEventListener('paste', (event) => {
+    
+    event.preventDefault();
+    var element = document.createElement('span');
+    const clipboardData = (event.clipboardData  || event.originalEvent.clipboardData);
+    var items = clipboardData.items;
+    
+    var blobs = [];
+    for (var i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf("image") === 0) {
+            blobs.push(items[i].getAsFile());
+        }
+    }
+    
+    const editor = document.getElementById('editor');
+    
+    element.innerHTML = clipboardData.getData('text/html');
+    var images = element.getElementsByTagName('img');
+    var other = document.createElement('div');
+    
+    document.body.appendChild(other);
+    
+    var dispatchGroup = new DispatchGroup();
+    window.dispatchGroup = dispatchGroup
+    
+    
+    if (blobs.length == 0) {
+        
+        if (window.webkit != undefined) {
+            var sources = [];
+            for (var i = 0; i < images.length; i++) {
+                dispatchGroup.enter();
+                _DOMElement.set(images[i].src, images[i]);
+                sources.push(images[i].src);
+            }
+            window.webkit.messageHandlers.copyHandler.postMessage(sources);
+        }
+        
+        
+//        for (var i = 0; i < images.length; i++) {
+//            RE.insertHTML('hallo');
+//            dispatchGroup.enter();
+//            var request = new XMLHttpRequest();
+//            request.open('GET', images[i].src.replace('blob:null', 'blob:'));
+//            request.responseType = "arraybuffer";
+//            request.onload = (e) => {
+//                RE.insertHTML('hallo');
+//                RE.insertHTML(e.response);
+//                dispatchGroup.leave();
+//            };
+//            request.send();
+//        }
+    }
+    
+    for (var i =0; i < blobs.length; i++) {
+        // theory is flawed, if you only copy an image, there won't be an image tag, we just have to create one and paste it into element.
+        dispatchGroup.enter();
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            images[i].src = event.target.result;
+            dispatchGroup.leave();
+            
+        };
+        reader.readAsDataURL(blobs[i]);
+     }
+    
+   
+    
+    dispatchGroup.setOnComlete(function() {
+//        document.body.appendChild(element);
+        RE.insertHTML(element.outerHTML);
+    });
 });
 
 //looks specifically for a Range selection and not a Caret selection

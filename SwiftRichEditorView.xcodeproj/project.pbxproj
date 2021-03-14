@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		692B97A325FB778F00EBACB8 /* rich_editor.js in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68724530EF600B593CB /* rich_editor.js */; };
+		692B97A425FB778F00EBACB8 /* rich_editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68924530EF600B593CB /* rich_editor.html */; };
+		692B97A525FB778F00EBACB8 /* rich_editor_tests.html in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68824530EF600B593CB /* rich_editor_tests.html */; };
+		692B97A625FB778F00EBACB8 /* assert.js in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68624530EF600B593CB /* assert.js */; };
+		692B97A725FB778F00EBACB8 /* normalize.css in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68B24530EF600B593CB /* normalize.css */; };
+		692B97A825FB778F00EBACB8 /* rich_editor_tests.js in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68524530EF600B593CB /* rich_editor_tests.js */; };
+		692B97A925FB778F00EBACB8 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68A24530EF600B593CB /* style.css */; };
 		69A8D63E24530E9200B593CB /* RichEditorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 69A8D63C24530E9200B593CB /* RichEditorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69A8D68E24530EF600B593CB /* RichEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A8D64524530EF500B593CB /* RichEditorView.swift */; };
 		69A8D68F24530EF600B593CB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A8D64624530EF500B593CB /* String+Extensions.swift */; };
@@ -491,6 +498,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				69A8D6EE245314CC00B593CB /* Assets.xcassets in Resources */,
+				692B97A925FB778F00EBACB8 /* style.css in Resources */,
+				692B97A325FB778F00EBACB8 /* rich_editor.js in Resources */,
+				692B97A425FB778F00EBACB8 /* rich_editor.html in Resources */,
+				692B97A725FB778F00EBACB8 /* normalize.css in Resources */,
+				692B97A625FB778F00EBACB8 /* assert.js in Resources */,
+				692B97A525FB778F00EBACB8 /* rich_editor_tests.html in Resources */,
+				692B97A825FB778F00EBACB8 /* rich_editor_tests.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

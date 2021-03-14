@@ -48,15 +48,16 @@ public class RichEditorWebView: WKWebView {
 
 /// RichEditorView is a UIView that displays richly styled text, and allows it to be edited in a WYSIWYG fashion.
 @objcMembers open class RichEditorView: UIView, UIScrollViewDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
+
     /// The delegate that will receive callbacks when certain actions are completed.
     open weak var delegate: RichEditorDelegate?
     
     /// Input accessory view to display over they keyboard.
     /// Defaults to nil
-    open override var inputAccessoryView: UIView? {
-        get { return webView.accessoryView }
-        set { webView.accessoryView = newValue }
-    }
+//    open override var inputAccessoryView: UIView? {
+//        get { return webView.accessoryView }
+//        set { webView.accessoryView = newValue }
+//    }
     
     /// The internal WKWebView that is used to display the text.
     open private(set) var webView: RichEditorWebView
@@ -140,8 +141,13 @@ public class RichEditorWebView: WKWebView {
         setup()
     }
     
+    private lazy var copyHandler: CopyMessageHandler = CopyMessageHandler(webView: self.webView)
+    
     private func setup() {
         // configure webview
+        let contentController = webView.configuration.userContentController
+        contentController.add(copyHandler, name: "copyHandler")
+        
         webView.frame = bounds
         webView.navigationDelegate = self
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -637,5 +643,65 @@ public class RichEditorWebView: WKWebView {
     open override func resignFirstResponder() -> Bool {
         blur()
         return true
+    }
+}
+
+private class CopyMessageHandler: NSObject, WKScriptMessageHandler {
+    
+    private let webView: RichEditorWebView
+    
+    init(webView: RichEditorWebView) {
+        self.webView = webView
+        super.init()
+    }
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let sources = message.body as? [String],
+              let data = UIPasteboard.general.data(forPasteboardType: "com.apple.flat-rtfd"),
+              let attributedString = try? NSAttributedString(data: data, options: [.documentType : NSAttributedString.DocumentType.rtfd], documentAttributes: nil) else { return }
+        let range = NSRange(location: 0, length: attributedString.length)
+        guard range.length > 0 else { return }
+        
+        let attachmentBase64Strings: [String] = (0..<range.length).compactMap {
+            index in
+            var effectiveRange: NSRangePointer?
+            let attributes = attributedString.attributes(at: index, longestEffectiveRange: effectiveRange, in: range)
+            guard let attachment = attributes[.attachment] as? NSTextAttachment,
+                  let data = attachment.fileWrapper?.regularFileContents else { return nil }
+            return "data:\(data.mimeType());base64,\(data.base64EncodedString())"
+        }
+        
+        zip(sources, attachmentBase64Strings)
+            .forEach { webView.evaluateJavaScript("RE.replaceImageSourceWithBase64Image('\($0.0)', '\($0.1)');", completionHandler: nil)}
+        
+        
+        
+    }
+}
+
+private extension Data {
+    func mimeType() -> String {
+
+        var b: UInt8 = 0
+        self.copyBytes(to: &b, count: 1)
+
+        switch b {
+        case 0xFF:
+            return "image/jpeg"
+        case 0x89:
+            return "image/png"
+        case 0x47:
+            return "image/gif"
+        case 0x4D, 0x49:
+            return "image/tiff"
+        case 0x25:
+            return "application/pdf"
+        case 0xD0:
+            return "application/vnd"
+        case 0x46:
+            return "text/plain"
+        default:
+            return "application/octet-stream"
+        }
     }
 }
