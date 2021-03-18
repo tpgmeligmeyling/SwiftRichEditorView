@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     }
     
     @objc private func done() {
-        print("haha")
+            print("haha")
 //        print("hahahahaha")
 //        itemsFromPasteBoard()
     }
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
 extension ViewController: RichEditorDelegate {
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
         // This is meant to act as a text cap
-        if content.count > 40000 {
+        if content.count > 400000000 {
             editor.html = prevText
         } else {
             prevText = content

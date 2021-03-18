@@ -664,15 +664,21 @@ private class CopyMessageHandler: NSObject, WKScriptMessageHandler {
         
         let attachmentBase64Strings: [String] = (0..<range.length).compactMap {
             index in
-            var effectiveRange: NSRangePointer?
-            let attributes = attributedString.attributes(at: index, longestEffectiveRange: effectiveRange, in: range)
+            let attributes = attributedString.attributes(at: index, longestEffectiveRange: nil, in: range)
             guard let attachment = attributes[.attachment] as? NSTextAttachment,
                   let data = attachment.fileWrapper?.regularFileContents else { return nil }
             return "data:\(data.mimeType());base64,\(data.base64EncodedString())"
         }
         
         zip(sources, attachmentBase64Strings)
-            .forEach { webView.evaluateJavaScript("RE.replaceImageSourceWithBase64Image('\($0.0)', '\($0.1)');", completionHandler: nil)}
+            .forEach {
+                print($0.0.prefix(1000))
+                print($0.1.prefix(1000))
+                webView.evaluateJavaScript("RE.replaceImageSourceWithBase64Image('\($0.0)', '\($0.1)');", completionHandler: {
+                a, b in
+                print(a)
+                print(b)
+            })}
         
         
         
