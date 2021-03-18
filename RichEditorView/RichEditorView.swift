@@ -406,7 +406,6 @@ public class RichEditorWebView: WKWebView {
     public func isCursorInTable() {
         runJS("RE.isCursorInTable") {
             _ in
-//            return r
         }
     }
     
