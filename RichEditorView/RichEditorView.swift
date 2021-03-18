@@ -671,16 +671,8 @@ private class CopyMessageHandler: NSObject, WKScriptMessageHandler {
         
         zip(sources, attachmentBase64Strings)
             .forEach {
-                print($0.0.prefix(1000))
-                print($0.1.prefix(1000))
-                webView.evaluateJavaScript("RE.replaceImageSourceWithBase64Image('\($0.0)', '\($0.1)');", completionHandler: {
-                a, b in
-                print(a)
-                print(b)
-            })}
-        
-        
-        
+                webView.evaluateJavaScript("RE.replaceImageSourceWithBase64Image('\($0.0)', '\($0.1)');", completionHandler: nil)
+            }
     }
 }
 
