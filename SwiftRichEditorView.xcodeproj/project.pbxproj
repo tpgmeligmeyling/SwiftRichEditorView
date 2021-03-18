@@ -7,13 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		692B97A325FB778F00EBACB8 /* rich_editor.js in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68724530EF600B593CB /* rich_editor.js */; };
-		692B97A425FB778F00EBACB8 /* rich_editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68924530EF600B593CB /* rich_editor.html */; };
-		692B97A525FB778F00EBACB8 /* rich_editor_tests.html in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68824530EF600B593CB /* rich_editor_tests.html */; };
-		692B97A625FB778F00EBACB8 /* assert.js in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68624530EF600B593CB /* assert.js */; };
-		692B97A725FB778F00EBACB8 /* normalize.css in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68B24530EF600B593CB /* normalize.css */; };
-		692B97A825FB778F00EBACB8 /* rich_editor_tests.js in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68524530EF600B593CB /* rich_editor_tests.js */; };
-		692B97A925FB778F00EBACB8 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 69A8D68A24530EF600B593CB /* style.css */; };
 		69A8D63E24530E9200B593CB /* RichEditorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 69A8D63C24530E9200B593CB /* RichEditorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69A8D68E24530EF600B593CB /* RichEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A8D64524530EF500B593CB /* RichEditorView.swift */; };
 		69A8D68F24530EF600B593CB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A8D64624530EF500B593CB /* String+Extensions.swift */; };
@@ -401,7 +394,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 69A8D63324530E9200B593CB /* Build configuration list for PBXProject "SwiftRichEditorView" */;
+			buildConfigurationList = 69A8D63324530E9200B593CB /* Build configuration list for PBXProject "RichEditorFramework" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -498,13 +491,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				69A8D6EE245314CC00B593CB /* Assets.xcassets in Resources */,
-				692B97A925FB778F00EBACB8 /* style.css in Resources */,
-				692B97A325FB778F00EBACB8 /* rich_editor.js in Resources */,
-				692B97A425FB778F00EBACB8 /* rich_editor.html in Resources */,
-				692B97A725FB778F00EBACB8 /* normalize.css in Resources */,
-				692B97A625FB778F00EBACB8 /* assert.js in Resources */,
-				692B97A525FB778F00EBACB8 /* rich_editor_tests.html in Resources */,
-				692B97A825FB778F00EBACB8 /* rich_editor_tests.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,10 +530,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					arm64e,
-					arm64,
-				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -611,10 +593,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					arm64e,
-					arm64,
-				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -690,7 +668,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Debug;
 		};
@@ -710,14 +687,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RichEditorView.RichEditorFramework;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Release;
 		};
@@ -758,7 +733,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		69A8D63324530E9200B593CB /* Build configuration list for PBXProject "SwiftRichEditorView" */ = {
+		69A8D63324530E9200B593CB /* Build configuration list for PBXProject "RichEditorFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69A8D63F24530E9200B593CB /* Debug */,
